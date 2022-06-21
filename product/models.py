@@ -43,7 +43,7 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('',kwargs={'slug':self.slug}) 
+        return reverse('product:detail',kwargs={'slug':self.slug}) 
     
     def __str__(self) -> str:
         return self.name
@@ -60,7 +60,7 @@ class Product(models.Model):
 
         thumb_io = BytesIO()
         img.save(thumb_io, 'JPEG', quality=85)
-        thumbnail = File(thumb_io, image)
+        thumbnail = File(thumb_io, name=image.name)
 
         return thumbnail
     
@@ -74,7 +74,4 @@ class Product(models.Model):
                 return self.thumbnail.url
         else:
             return ''
- 
-
-
-    
+            
